@@ -7,24 +7,37 @@ on:
 
 jobs:
   build_and_test:
-    # 🚨 CAMBIAMOS LA IMAGEN POR UN TAG MÁS GENÉRICO 🚨
-    container: 
-      image: cypress/base:18 # ¡Etiqueta simple y estable!
-
+    # Volvemos al runner genérico de Ubuntu
     runs-on: ubuntu-latest 
 
     defaults:
       run:
+        # La ruta de trabajo es la subcarpeta del proyecto
         working-directory: ./tesis 
         
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
-      
-      # 1. Instalar dependencias
+
+      # 1. Configurar Node.js (necesario al no usar Docker)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' 
+
+      # 2. Instalar dependencias y forzar binarios de Cypress
       - name: Install Dependencies
         run: npm install
+        env:
+          # Variable para forzar la descarga de binarios de Cypress
+          CYPRESS_INSTALL_BINARY: 1 
 
-      # 2. Ejecutar pruebas
+      # 3. Forzar permisos de ejecución para el binario de Cypress
+      # Esto es necesario en Ubuntu y resuelve el error 'Permission denied'
+      - name: Fix Cypress Permissions
+        run: chmod +x ./node_modules/.bin/cypress
+
+      # 4. Ejecutar pruebas
       - name: Run Tests
-        run: npm test
+        # Usamos npx para asegurar la ejecución del binario local
+        run: npx npm test
