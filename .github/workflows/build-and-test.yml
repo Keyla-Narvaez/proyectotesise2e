@@ -1,23 +1,14 @@
 name: CI/CD Pipeline
-
 # El evento que dispara la pipeline
 on:
   push:
     branches:
-      - main  # Se ejecuta solo cuando se sube código a la rama 'main'
-
+      - main
 jobs:
   build_and_test:
-    # La imagen del sistema operativo donde se ejecutará
     runs-on: ubuntu-latest 
-
-    # ... código anterior ...
-
     steps:
-      # 1. Checkout: Descarga el código del repositorio
       - uses: actions/checkout@v4
-
-      # 2. Setup Node.js: Configura el entorno de Node
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
@@ -26,14 +17,14 @@ jobs:
       # 3. Install Dependencies
       - name: Install Dependencies
         run: npm install
-        # working-directory: ./tesis  <-- Si ya corregiste la ruta a la raíz, quita esto
+        working-directory: ./tesis  # <--- ¡IMPORTANTE!
 
       # **NUEVO PASO: Corregir permisos de ejecución**
       - name: Fix Cypress Permissions
         run: chmod +x ./node_modules/.bin/cypress
-        # working-directory: ./tesis  <-- Usa la misma working-directory que para npm install/test
+        working-directory: ./tesis  # <--- ¡IMPORTANTE!
 
       # 4. Run Tests
       - name: Run Tests
         run: npm test
-        # working-directory: ./tesis  <-- Si ya corregiste la ruta a la raíz, quita esto
+        working-directory: ./tesis  # <--- ¡IMPORTANTE!
