@@ -59,7 +59,7 @@ class createSuppliersPage {
 
         cy.wait(2000);
 
-        const cedula = poData.purchaseOrder.proveedor;
+        const cedula = poData.purchaseOrder.cedula;
 
         cy.log("Escribiendo en Registro Fiscal (TaxReg)");
         cy.xpath('//input[contains(@id, "TaxReg::content")]', {
