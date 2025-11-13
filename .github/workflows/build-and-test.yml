@@ -7,37 +7,42 @@ on:
 
 jobs:
   build_and_test:
-    # Usamos el runner estándar de GitHub Actions (Ubuntu)
     runs-on: ubuntu-latest 
 
     defaults:
       run:
-        # 🚨 IMPORTANTE: Todos los comandos de npm/Cypress se ejecutan DENTRO de la subcarpeta 'tesis'
         working-directory: ./tesis 
         
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 1. Configurar Node.js
-      - name: Setup Node.js
+      # 1. Configurar Node.js y Cache de NPM
+      - name: Setup Node.js and npm Cache
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x' 
+          node-version: '20.x'
 
-      # 2. Instalar dependencias
-      # La variable de entorno fuerza a Cypress a descargar su binario (soluciona "binary is missing")
+      # 2. Cache del Binario de Cypress (¡Nuevo paso crucial!)
+      # Esto guarda y restaura el binario de Cypress para ejecuciones futuras.
+      - name: Cache Cypress Binary
+        uses: actions/cache@v4
+        id: cache-cypress
+        with:
+          path: ~/.cache/Cypress
+          key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
+      
+      # 3. Instalar dependencias
       - name: Install Dependencies
         run: npm install
         env:
+          # Variable para forzar la descarga de binarios de Cypress
           CYPRESS_INSTALL_BINARY: 1 
 
-      # 3. Forzar permisos de ejecución
-      # Esto es necesario en entornos Linux para que el binario de Cypress pueda ejecutarse (soluciona "Permission denied")
+      # 4. Forzar permisos de ejecución (para el error 'Permission denied')
       - name: Fix Cypress Permissions
         run: chmod +x ./node_modules/.bin/cypress
 
-      # 4. Ejecutar pruebas
-      # Usamos 'npx npm test' para asegurar que se use el ejecutable correcto.
+      # 5. Ejecutar pruebas
       - name: Run Tests
         run: npx npm test
