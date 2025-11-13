@@ -32,11 +32,32 @@ jobs:
       - name: Install Dependencies
         run: npm ci
 
+      - name: Install Microsoft Edge
+        run: |
+          sudo apt update
+          sudo apt install -y wget apt-transport-https software-properties-common
+          wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
+          sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/edge stable main"
+          sudo apt update
+          sudo apt install -y microsoft-edge-stable
+          microsoft-edge-stable --version
+
       - name: Install Missing Cypress Binary
         run: |
           chmod +x ./node_modules/.bin/cypress || true
           npx cypress install
 
       - name: Run Tests
-        run: npx cypress run --browser chrome
+        run: npx cypress run --browser edge
+
+      - name: Upload Cypress Artifacts (Screenshots & Videos)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            tesis/cypress/screenshots
+            tesis/cypress/videos
+
+
 
