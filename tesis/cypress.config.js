@@ -61,7 +61,9 @@ module.exports = defineConfig({
       USER: "knarvaez@jbgye.org.ec",
       PASS: "JBG2025$$",
       USER2: "mvillavice@jbgye.org.ec",
-      PASS2: "ROMEO1234*"
+      PASS2: "ROMEO1234*",
+      USER3: "msanchezmo@jbgye.org.ec",
+      PASS3: "Angelin@198706"
     },
 
     // ✅ Config reporter Mochawesome (solo JSON)
@@ -69,8 +71,8 @@ module.exports = defineConfig({
     reporterOptions: {
       reportDir: "cypress/results",
       overwrite: false,
-      html: true,       // ⛔ no generar HTML directo
-      json: true,        // ✅ generar JSON para merge posterior
+      html: true,       //  no generar HTML directo
+      json: true,        //  generar JSON para merge posterior
       charts: true,
       embeddedScreenshots: true,
       inlineAssets: true
