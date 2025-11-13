@@ -7,14 +7,12 @@ on:
 
 jobs:
   build_and_test:
-    #Usamos un contenedor de Docker con Cypress para evitar problemas de permisos y binarios.
+    # 🚨 CAMBIAMOS LA IMAGEN POR UN TAG MÁS GENÉRICO 🚨
     container: 
-      # Usamos una etiqueta oficial y funcional (Node 18 con navegadores).
-      image: cypress/browsers:node-18.15.0-chrome-111-ff-111
+      image: cypress/base:18 # ¡Etiqueta simple y estable!
 
-    runs-on: ubuntu-latest # Necesario para iniciar el contenedor
+    runs-on: ubuntu-latest 
 
-    # Configuramos la carpeta base de trabajo para todos los pasos
     defaults:
       run:
         working-directory: ./tesis 
@@ -24,10 +22,9 @@ jobs:
         uses: actions/checkout@v4
       
       # 1. Instalar dependencias
-      # El contenedor ya tiene Node, solo necesitamos ejecutar npm install
       - name: Install Dependencies
         run: npm install
 
-      # 2. Ejecutar pruebas (El binario de Cypress ahora funciona dentro del contenedor)
+      # 2. Ejecutar pruebas
       - name: Run Tests
         run: npm test
