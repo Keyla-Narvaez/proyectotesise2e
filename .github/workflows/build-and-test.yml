@@ -11,6 +11,7 @@ jobs:
 
     defaults:
       run:
+        # La ruta de trabajo para comandos npm/Cypress
         working-directory: ./tesis 
         
     steps:
@@ -23,23 +24,24 @@ jobs:
         with:
           node-version: '20.x'
 
-      # 2. Cache del Binario de Cypress (¡Nuevo paso crucial!)
-      # Esto guarda y restaura el binario de Cypress para ejecuciones futuras.
+      # 2. Cache del Binario de Cypress (¡Soluciona el error de "binary is missing"!)
       - name: Cache Cypress Binary
         uses: actions/cache@v4
         id: cache-cypress
         with:
+          # Ruta donde Cypress guarda su binario
           path: ~/.cache/Cypress
+          # La clave se basa en el sistema operativo y el package-lock para invalidar si Cypress cambia de versión
           key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       
       # 3. Instalar dependencias
       - name: Install Dependencies
         run: npm install
         env:
-          # Variable para forzar la descarga de binarios de Cypress
+          # Variable para forzar la descarga del binario de Cypress DURANTE npm install
           CYPRESS_INSTALL_BINARY: 1 
 
-      # 4. Forzar permisos de ejecución (para el error 'Permission denied')
+      # 4. Forzar permisos de ejecución (Soluciona el error 'Permission denied' que ya tuvimos)
       - name: Fix Cypress Permissions
         run: chmod +x ./node_modules/.bin/cypress
 
