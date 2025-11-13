@@ -38,4 +38,5 @@ jobs:
           npx cypress install
 
       - name: Run Tests
-        run: npm test
+        run: npx cypress run --browser chrome
+
