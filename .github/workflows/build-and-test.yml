@@ -11,40 +11,42 @@ jobs:
 
     defaults:
       run:
-        # La ruta de trabajo para comandos npm/Cypress
         working-directory: ./tesis 
         
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 1. Configurar Node.js y Cache de NPM
-      - name: Setup Node.js and npm Cache
+      # 1. Configurar Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20.x'
 
-      # 2. Cache del Binario de Cypress (¡Soluciona el error de "binary is missing"!)
+      # 2. Cache del Binario de Cypress
+      # Esto guarda y restaura el binario en ~/.cache/Cypress
       - name: Cache Cypress Binary
         uses: actions/cache@v4
         id: cache-cypress
         with:
-          # Ruta donde Cypress guarda su binario
           path: ~/.cache/Cypress
-          # La clave se basa en el sistema operativo y el package-lock para invalidar si Cypress cambia de versión
           key: cypress-${{ runner.os }}-${{ hashFiles('**/package-lock.json') }}
       
-      # 3. Instalar dependencias
+      # 3. Instalar dependencias (del proyecto)
       - name: Install Dependencies
         run: npm install
-        env:
-          # Variable para forzar la descarga del binario de Cypress DURANTE npm install
-          CYPRESS_INSTALL_BINARY: 1 
+        # Eliminamos CYPRESS_INSTALL_BINARY para evitar conflictos,
+        # ya que vamos a usar un paso de instalación dedicado.
 
-      # 4. Forzar permisos de ejecución (Soluciona el error 'Permission denied' que ya tuvimos)
+      # 4. Instalar Binario de Cypress (¡PASO CLAVE!)
+      # Este paso fuerza la descarga del binario que falta.
+      - name: Install Missing Cypress Binary
+        run: npx cypress install
+
+      # 5. Forzar permisos de ejecución (para 'Permission denied')
       - name: Fix Cypress Permissions
         run: chmod +x ./node_modules/.bin/cypress
 
-      # 5. Ejecutar pruebas
+      # 6. Ejecutar pruebas
       - name: Run Tests
         run: npx npm test
