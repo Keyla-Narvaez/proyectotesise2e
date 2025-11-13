@@ -1,6 +1,5 @@
 name: CI/CD Pipeline
 
-# Evento: Se activa cuando hay un 'push' a la rama 'main'
 on:
   push:
     branches:
@@ -8,36 +7,31 @@ on:
 
 jobs:
   build_and_test:
-    # Entorno de ejecución
     runs-on: ubuntu-latest 
 
     steps:
-      # 1. Descargar el código
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      # 2. Configurar Node.js
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x' # Puedes cambiar la versión según tu proyecto
+          node-version: '20.x' 
 
-      # 3. Instalar dependencias (busca package.json en ./tesis)
+      # Instalar dependencias con una variable que fuerza la descarga de Cypress
       - name: Install Dependencies
         run: npm install
-        working-directory: ./tesis 
-
-      # 4. Forzar la descarga del binario de Cypress (soluciona 'binary is missing')
-      - name: Download Cypress Binary
-        run: npx cypress install
         working-directory: ./tesis
+        env:
+          # Esta variable fuerza a Cypress a reinstalar el binario en caso de problemas
+          CYPRESS_INSTALL_BINARY: 1 
+          
+      # El paso 4 (Download Cypress Binary) NO es necesario si usamos CYPRESS_INSTALL_BINARY
 
-      # 5. Corregir permisos de ejecución (soluciona 'Permission denied')
-      - name: Fix Cypress Permissions
-        run: chmod +x ./node_modules/.bin/cypress
-        working-directory: ./tesis
-
-      # 6. Ejecutar pruebas (npm test)
+      # El paso 5 (Fix Cypress Permissions) lo quitamos para evitar conflictos
+      
+      # 6. Ejecutar pruebas
       - name: Run Tests
-        run: npm test
+        # Usamos 'npx' para asegurar que el binario local de cypress se ejecute correctamente
+        run: npx npm test
         working-directory: ./tesis
