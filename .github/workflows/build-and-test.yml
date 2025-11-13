@@ -7,31 +7,28 @@ on:
 
 jobs:
   build_and_test:
-    runs-on: ubuntu-latest 
+    # Usamos un contenedor Docker de Cypress que ya tiene Node.js, Cypress, y permisos.
+    container: 
+      image: cypress/base:20 # Usamos una imagen que tiene Node 20 y permisos correctos
 
+    runs-on: ubuntu-latest # Esto sigue siendo necesario para ejecutar el contenedor
+
+    defaults:
+      run:
+        working-directory: ./tesis # Mantenemos esta ruta de trabajo
+        
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+      
+      # Los pasos de 'setup-node' y 'Download Cypress Binary' ya no son necesarios
+      # porque la imagen base ya los trae.
 
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20.x' 
-
-      # Instalar dependencias con una variable que fuerza la descarga de Cypress
+      # 1. Instalar dependencias
       - name: Install Dependencies
         run: npm install
-        working-directory: ./tesis
-        env:
-          # Esta variable fuerza a Cypress a reinstalar el binario en caso de problemas
-          CYPRESS_INSTALL_BINARY: 1 
-          
-      # El paso 4 (Download Cypress Binary) NO es necesario si usamos CYPRESS_INSTALL_BINARY
 
-      # El paso 5 (Fix Cypress Permissions) lo quitamos para evitar conflictos
-      
-      # 6. Ejecutar pruebas
+      # 2. Ejecutar pruebas (El binario de Cypress ya es accesible y ejecutable)
       - name: Run Tests
-        # Usamos 'npx' para asegurar que el binario local de cypress se ejecute correctamente
-        run: npx npm test
-        working-directory: ./tesis
+        # Usamos el comando 'npm test' que ya tenías configurado
+        run: npm test
