@@ -11,6 +11,8 @@ jobs:
     # La imagen del sistema operativo donde se ejecutará
     runs-on: ubuntu-latest 
 
+    # ... código anterior ...
+
     steps:
       # 1. Checkout: Descarga el código del repositorio
       - uses: actions/checkout@v4
@@ -19,12 +21,14 @@ jobs:
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x' # Puedes cambiar la versión de Node.js
+          node-version: '20.x'
 
-      # 3. Install Dependencies: Instala los paquetes de tu proyecto
+      # 3. Install Dependencies: ¡Añade working-directory aquí!
       - name: Install Dependencies
         run: npm install
-
-      # 4. Run Tests: Ejecuta el comando de pruebas (si existe)
+        working-directory: ./tesis  # <--- Cambia esto a la subcarpeta que contiene package.json
+        
+      # 4. Run Tests: ¡Y también aquí!
       - name: Run Tests
-        run: npm test # Asegúrate de que tu 'package.json' tenga un script de prueba
+        run: npm test
+        working-directory: ./tesis  # <--- Cambia esto también
