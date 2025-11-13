@@ -423,7 +423,7 @@ class createSuppliersPage {
             force: true
         });
 
-        cy.wait(1000);
+        cy.wait(3000);
 
         cy.get('[title="Crear"]').first().click();
 

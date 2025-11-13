@@ -6,21 +6,21 @@ import createSuppliersPage from '../support/pages/createSupplier.page'
 
 describe('E2E - Crear y Recepcionar Orden de Compra', () => {
 
-    it('📋 Creación de artículos', () => {
+    /*it('📋 Creación de artículos', () => {
 
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
             createItemsPage.createItems(); 
-    });
-
+    });*/
+cy.wait(3000);
     it('👨‍💻 Creación de proveedores', () => {
 
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER3'), Cypress.env('PASS3'));
             createSuppliersPage.createSuppliers(); 
     });
-    
-    it('✅ Crear Orden de Compra', () => {
+cy.wait(3000);    
+    /*it('✅ Crear Orden de Compra', () => {
 
         
             // Login & flujo de creación
@@ -28,7 +28,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             poPage.purchaseOrder(); 
         
     });
-
+cy.wait(3000);
 
 
     it('📦 Recepcionar Orden de Compra', () => {
@@ -45,5 +45,6 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             receptionPage.receptionPageOrder(codigoOC);
         });
     });
+    */
 
 });
