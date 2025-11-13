@@ -1,0 +1,127 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-11-04T21:52:01.688Z",
+    "end": "2025-11-04T21:54:22.441Z",
+    "duration": 140753,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "2b872161-5ac6-4621-9bdf-224010b25be9",
+      "title": "",
+      "fullFile": "cypress\\e2e\\create_po.spec.js",
+      "file": "cypress\\e2e\\create_po.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "40e3b093-696c-4c9c-9920-a50335c2ced2",
+          "title": "E2E - Crear y Recepcionar Orden de Compra",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "✅ Crear Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra ✅ Crear Orden de Compra",
+              "timedOut": null,
+              "duration": 36469,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1️⃣ Cargar fixture con info del PO\ncy.fixture('po').then(poData => {\n  // 2️⃣ Login & flujo de creación\n  _login.default.login(Cypress.env('USER'), Cypress.env('PASS'));\n  _purchaseOrder.default.purchaseOrder(); // <- esto ejecuta completePo() y guarda @codigoOC\n  // 3️⃣ Esperar a que completePo guarde el código\n  cy.get('@codigoOC').then(codigoOC => {\n    // 4️⃣ Leer JSON guardado (doble seguridad)\n    cy.readFile('cypress/fixtures/datos-guardados.json').then(({\n      codigoOC: codigoJson\n    }) => {\n      const codigo = codigoOC || codigoJson;\n      const fecha = new Date().toLocaleString();\n      const {\n        proveedor,\n        unidadNegocio,\n        ubicacionEnvio,\n        comprador,\n        articulos\n      } = poData.purchaseOrder;\n      const articulosHtml = articulos.map((item, index) => `\n      <tr>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${index + 1}</td>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${item.codigoArticulo}</td>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${item.cantidad}</td>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${item.price}</td>\n      </tr>\n    `).join(\"\");\n      const html = `\n      <div style=\"background:#eef;padding:12px;border-radius:8px;font-size:13px;\">\n        <b>📦 Orden Generada:</b> ${codigo}<br><br>\n        <b>Proveedor:</b> ${proveedor}<br>\n        <b>Unidad Negocio:</b> ${unidadNegocio}<br>\n        <b>Ubicación Envío:</b> ${ubicacionEnvio}<br>\n        <b>Comprador:</b> ${comprador}<br><br>\n        <b>🛒 Artículos:</b><br><br>\n        <table style=\"border-collapse:collapse;font-size:12px;\">\n          <tr style=\"background:#ddd;\">\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">#</th>\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">Código</th>\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">Cantidad</th>\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">Precio</th>\n          </tr>\n          ${articulosHtml}\n        </table><br>\n        <b>👤 Usuario:</b> ${Cypress.env(\"USER\")}<br>\n        <b>📅 Fecha:</b> ${fecha}\n      </div>\n    `;\n      // 5️⃣ Enviar bloque HTML al reporte Mochawesome\n      cy.task('mochawesome:addContext', {\n        test: Cypress.currentTest.title,\n        value: html\n      });\n      cy.log(`✅ Orden registrada en reporte: ${codigo}`);\n    });\n  });\n});",
+              "err": {},
+              "uuid": "6ee24750-80d7-4153-899a-c684bcb40075",
+              "parentUUID": "40e3b093-696c-4c9c-9920-a50335c2ced2",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "📦 Recepcionar Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra 📦 Recepcionar Orden de Compra",
+              "timedOut": null,
+              "duration": 100430,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Esperar 2 minutos\ncy.wait(60000);\ncy.readFile('cypress/fixtures/datos-guardados.json').then(data => {\n  const codigoOC = data.codigoOC;\n  cy.log(`Código cargado desde JSON: ${codigoOC}`);\n  _login.default.login(Cypress.env('USER'), Cypress.env('PASS'));\n  // Llamar la recepción pasándole el código\n  _reception.default.receptionPageOrder(codigoOC);\n});",
+              "err": {},
+              "uuid": "ccd2c85a-7347-443f-9b94-fffa3c692261",
+              "parentUUID": "40e3b093-696c-4c9c-9920-a50335c2ced2",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "6ee24750-80d7-4153-899a-c684bcb40075",
+            "ccd2c85a-7347-443f-9b94-fffa3c692261"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 136899,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

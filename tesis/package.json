@@ -1,0 +1,25 @@
+{
+  "name": "proyecto-cypress-tesis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean:reports": "rm -rf cypress/results || rmdir /S /Q cypress\\results",
+    "cy:run": "npm run clean:reports && cypress run --browser edge",
+    "merge:reports": "npx mochawesome-merge cypress/results/*.json > cypress/results/report.json",
+    "generate:report": "npx marge cypress/results/report.json -o cypress/results/mochawesome-report",
+    "report": "npm run merge:reports && npm run generate:report",
+    "test": "npm run cy:run && npm run report",
+    "report:open": "npm run report && start cypress/results/mochawesome-report/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "cypress": "^15.5.0",
+    "cypress-xpath": "^2.0.1",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.0.0",
+    "mochawesome-report-generator": "^6.3.0"
+  }
+}

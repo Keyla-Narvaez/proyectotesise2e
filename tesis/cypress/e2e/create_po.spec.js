@@ -1,0 +1,49 @@
+import loginPage from '../support/pages/login.page';
+import poPage from '../support/pages/purchaseOrder.page';
+import receptionPage from '../support/pages/reception.page';
+import createItemsPage from '../support/pages/createItems.page'
+import createSuppliersPage from '../support/pages/createSupplier.page'
+
+describe('E2E - Crear y Recepcionar Orden de Compra', () => {
+
+    it('📋 Creación de artículos', () => {
+
+            // Login & flujo de creación
+            loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
+            createItemsPage.createItems(); 
+    });
+
+    it('👨‍💻 Creación de proveedores', () => {
+
+            // Login & flujo de creación
+            loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
+            createSuppliersPage.createSuppliers(); 
+    });
+    
+    it('✅ Crear Orden de Compra', () => {
+
+        
+            // Login & flujo de creación
+            loginPage.login(Cypress.env('USER'), Cypress.env('PASS'));
+            poPage.purchaseOrder(); 
+        
+    });
+
+
+
+    it('📦 Recepcionar Orden de Compra', () => {
+        // Esperar 2 minutos
+        cy.wait(60000);
+
+        cy.readFile('cypress/fixtures/datos-guardados.json').then((data) => {
+            const codigoOC = data.codigoOC;
+            cy.log(`Código cargado desde JSON: ${codigoOC}`);
+
+            loginPage.login(Cypress.env('USER'), Cypress.env('PASS'));
+
+            // Llamar la recepción pasándole el código
+            receptionPage.receptionPageOrder(codigoOC);
+        });
+    });
+
+});

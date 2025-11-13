@@ -1,0 +1,132 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 1,
+    "pending": 0,
+    "failures": 1,
+    "start": "2025-11-05T18:24:33.009Z",
+    "end": "2025-11-05T18:28:20.695Z",
+    "duration": 227686,
+    "testsRegistered": 2,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "0ae16836-4cc7-4d85-8aa4-de922c7e77df",
+      "title": "",
+      "fullFile": "cypress\\e2e\\create_po.spec.js",
+      "file": "cypress\\e2e\\create_po.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "0f649ce3-aa78-4e5a-8d1e-55e5ad0f4cb1",
+          "title": "E2E - Crear y Recepcionar Orden de Compra",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "✅ Crear Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra ✅ Crear Orden de Compra",
+              "timedOut": null,
+              "duration": 48237,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1️⃣ Cargar fixture con info del PO\ncy.fixture('po').then(poData => {\n  // 2️⃣ Login & flujo de creación\n  _login.default.login(Cypress.env('USER'), Cypress.env('PASS'));\n  _purchaseOrder.default.purchaseOrder(); // <- esto ejecuta completePo() y guarda @codigoOC\n  // 3️⃣ Esperar a que completePo guarde el código\n  cy.get('@codigoOC').then(codigoOC => {\n    // 4️⃣ Leer JSON guardado (doble seguridad)\n    cy.readFile('cypress/fixtures/datos-guardados.json').then(({\n      codigoOC: codigoJson\n    }) => {\n      const codigo = codigoOC || codigoJson;\n      const fecha = new Date().toLocaleString();\n      const {\n        proveedor,\n        unidadNegocio,\n        ubicacionEnvio,\n        comprador,\n        articulos\n      } = poData.purchaseOrder;\n      const articulosHtml = articulos.map((item, index) => `\n      <tr>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${index + 1}</td>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${item.codigoArticulo}</td>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${item.cantidad}</td>\n        <td style=\"padding:4px 8px;border:1px solid #ccc;\">${item.price}</td>\n      </tr>\n    `).join(\"\");\n      const html = `\n      <div style=\"background:#eef;padding:12px;border-radius:8px;font-size:13px;\">\n        <b>📦 Orden Generada:</b> ${codigo}<br><br>\n        <b>Proveedor:</b> ${proveedor}<br>\n        <b>Unidad Negocio:</b> ${unidadNegocio}<br>\n        <b>Ubicación Envío:</b> ${ubicacionEnvio}<br>\n        <b>Comprador:</b> ${comprador}<br><br>\n        <b>🛒 Artículos:</b><br><br>\n        <table style=\"border-collapse:collapse;font-size:12px;\">\n          <tr style=\"background:#ddd;\">\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">#</th>\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">Código</th>\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">Cantidad</th>\n            <th style=\"padding:4px 8px;border:1px solid #ccc;\">Precio</th>\n          </tr>\n          ${articulosHtml}\n        </table><br>\n        <b>👤 Usuario:</b> ${Cypress.env(\"USER\")}<br>\n        <b>📅 Fecha:</b> ${fecha}\n      </div>\n    `;\n      // 5️⃣ Enviar bloque HTML al reporte Mochawesome\n      cy.task('mochawesome:addContext', {\n        test: Cypress.currentTest.title,\n        value: html\n      });\n      cy.log(`✅ Orden registrada en reporte: ${codigo}`);\n    });\n  });\n});",
+              "err": {},
+              "uuid": "e401946d-9100-4fec-9c9b-f8b5fba5d54d",
+              "parentUUID": "0f649ce3-aa78-4e5a-8d1e-55e5ad0f4cb1",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "📦 Recepcionar Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra 📦 Recepcionar Orden de Compra",
+              "timedOut": null,
+              "duration": 74292,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Esperar 2 minutos\ncy.wait(60000);\ncy.readFile('cypress/fixtures/datos-guardados.json').then(data => {\n  const codigoOC = data.codigoOC;\n  cy.log(`Código cargado desde JSON: ${codigoOC}`);\n  _login.default.login(Cypress.env('USER'), Cypress.env('PASS'));\n  // Llamar la recepción pasándole el código\n  _reception.default.receptionPageOrder(codigoOC);\n});",
+              "err": {
+                "message": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `//*[@id=\"pt1:_UISfpr1:0:itr1_RI:1:cl3_RI\"]`, but never found it.",
+                "estack": "AssertionError: Timed out retrying after 4000ms: Expected to find element: `//*[@id=\"pt1:_UISfpr1:0:itr1_RI:1:cl3_RI\"]`, but never found it.\n    at receptionPage.navigateInventory (webpack://proyecto-cypress-tesis/./cypress/support/pages/reception.page.js:10:7)\n    at receptionPage.receptionPageOrder (webpack://proyecto-cypress-tesis/./cypress/support/pages/reception.page.js:95:9)\n    at Context.eval (webpack://proyecto-cypress-tesis/./cypress/e2e/create_po.spec.js:85:20)\n    at getRet (https://ibngjb-test.fa.ocs.oraclecloud.com/__cypress/runner/cypress_runner.js:122243:20)\n    at tryCatcher (https://ibngjb-test.fa.ocs.oraclecloud.com/__cypress/runner/cypress_runner.js:1777:23)\n    at Promise.attempt.Promise.try (https://ibngjb-test.fa.ocs.oraclecloud.com/__cypress/runner/cypress_runner.js:4285:29)\n    at Context.thenFn (https://ibngjb-test.fa.ocs.oraclecloud.com/__cypress/runner/cypress_runner.js:122254:66)\n    at Context.then (https://ibngjb-test.fa.ocs.oraclecloud.com/__cypress/runner/cypress_runner.js:122505:21)\n    at wrapped (https://ibngjb-test.fa.ocs.oraclecloud.com/__cypress/runner/cypress_runner.js:145577:19)",
+                "diff": null
+              },
+              "uuid": "b424c25e-d62e-4811-aead-69045d65ca31",
+              "parentUUID": "0f649ce3-aa78-4e5a-8d1e-55e5ad0f4cb1",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "e401946d-9100-4fec-9c9b-f8b5fba5d54d"
+          ],
+          "failures": [
+            "b424c25e-d62e-4811-aead-69045d65ca31"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 122529,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
