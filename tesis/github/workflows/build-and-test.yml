@@ -1,0 +1,30 @@
+name: CI/CD Pipeline
+
+# El evento que dispara la pipeline
+on:
+  push:
+    branches:
+      - main  # Se ejecuta solo cuando se sube código a la rama 'main'
+
+jobs:
+  build_and_test:
+    # La imagen del sistema operativo donde se ejecutará
+    runs-on: ubuntu-latest 
+
+    steps:
+      # 1. Checkout: Descarga el código del repositorio
+      - uses: actions/checkout@v4
+
+      # 2. Setup Node.js: Configura el entorno de Node
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x' # Puedes cambiar la versión de Node.js
+
+      # 3. Install Dependencies: Instala los paquetes de tu proyecto
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Run Tests: Ejecuta el comando de pruebas (si existe)
+      - name: Run Tests
+        run: npm test # Asegúrate de que tu 'package.json' tenga un script de prueba
