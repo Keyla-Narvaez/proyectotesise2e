@@ -16,7 +16,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
     it('👨‍💻 Creación de proveedores', () => {
 
             // Login & flujo de creación
-            loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
+            loginPage.login(Cypress.env('USER'), Cypress.env('PASS'));
             createSuppliersPage.createSuppliers(); 
     });
     
