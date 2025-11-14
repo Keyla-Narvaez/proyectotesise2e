@@ -431,76 +431,81 @@ class createSuppliersPage {
             .find('a')
             .click();
 
-         // Usamos el selector parcial [id*="..."] con el comando .type()
-cy.get('input[id*="cbuLov\\:\\:content"]')
-  // Aseguramos la visibilidad, esperando hasta 10 segundos
-  .should('be.visible', { timeout: 10000 }) 
-  // Limpiamos el campo
-  .clear() 
-  // Ingresamos el texto y presionamos {enter} para simular el tabulador o la selección
-  .type('HOSPITAL LUIS VERNAZA{enter}');
+        // Usamos el selector parcial [id*="..."] con el comando .type()
+        cy.get('input[id*="cbuLov\\:\\:content"]')
+            // Aseguramos la visibilidad, esperando hasta 10 segundos
+            .should('be.visible', { timeout: 10000 })
+            // Limpiamos el campo
+            .clear()
+            // Ingresamos el texto y presionamos {enter} para simular el tabulador o la selección
+            .type('HOSPITAL LUIS VERNAZA{enter}');
 
- cy.wait(3000);
-cy.get('input[id*="shipLoc\\:\\:content"]', { timeout: 10000 })
-  .should('be.visible') 
-  .as('shipLocInput');
-cy.get('@shipLocInput')
-  .type('{selectall}GUAYAQUIL{enter}', { force: true });
+        cy.wait(3000);
+        cy.get('input[id*="shipLoc\\:\\:content"]', { timeout: 10000 })
+            .should('be.visible')
+            .as('shipLocInput');
+        cy.get('@shipLocInput')
+            .type('{selectall}GUAYAQUIL{enter}', { force: true });
 
-cy.get('input[id*="billLoc\\:\\:content"]', { timeout: 10000 })
-  .should('be.visible') 
-  .as('billLocInput');
-cy.get('@billLocInput')
-  .type('{selectall}GUAYAQUIL{enter}', { force: true });
+        cy.get('input[id*="billLoc\\:\\:content"]', { timeout: 10000 })
+            .should('be.visible')
+            .as('billLocInput');
+        cy.get('@billLocInput')
+            .type('{selectall}GUAYAQUIL{enter}', { force: true });
 
 
-cy.wait(3000); 
+        cy.wait(3000);
 
-cy.get('div[id*="cb3"] a[accesskey="G"]')
-  // Forzamos el clic para ignorar el 'display: none' del contenedor padre.
-  .click({ force: true });
+       // cy.get('div[id*="cb3"] a[accesskey="G"]')
+        //.click({ force: true });
 
-cy.wait(3000); 
+        cy.get('div[id*="cb3"] a[accesskey="G"]')
+    .then($el => {
+        $el[0].dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+    });
 
-            cy.contains("a", "Contactos").should("be.visible").click({
-                    force: true
-                });
-        
-                cy.wait(3000);
-        
-                cy.get('[title="Crear"]').first().click();
-        
-                cy.xpath('//label[text()="Nombre"]/ancestor::tr[1]//input')
-                    .first()
-                    .type("hczrutf");
-        
-                cy.xpath('//label[text()="Apellidos"]/ancestor::tr[1]//input')
-                    .first()
-                    .type("dscozri");
-        
-                cy.xpath('//label[text()="Correo electrónico"]/ancestor::tr[1]//input')
-                    .first()
-                    .type("sendmail-test-discard+300000021257644@oracle.com");
-        
-                cy.contains("Acciones").click();
-        
-                cy.contains("Seleccionar y agregar").click({
-                    force: true
-                });
-        
-                cy.wait(3000);
-                cy.contains("GUAYAQUIL").closest("tr").click();
-        
-                cy.wait(3000);
-        
-                cy.contains("Aplicar").click();
-        
-                cy.wait(3000);
-                cy.contains("Aceptar").click();
-        
-                cy.contains("Guardar y Cerrar").click();
-        
-                
+
+        cy.wait(4000);
+
+        cy.contains("a", "Contactos").should("be.visible").click({
+            force: true
+        });
+
+        cy.wait(3000);
+
+        cy.get('[title="Crear"]').first().click();
+
+        cy.xpath('//label[text()="Nombre"]/ancestor::tr[1]//input')
+            .first()
+            .type("hczrutf");
+
+        cy.xpath('//label[text()="Apellidos"]/ancestor::tr[1]//input')
+            .first()
+            .type("dscozri");
+
+        cy.xpath('//label[text()="Correo electrónico"]/ancestor::tr[1]//input')
+            .first()
+            .type("sendmail-test-discard+300000021257644@oracle.com");
+
+        cy.contains("Acciones").click();
+
+        cy.contains("Seleccionar y agregar").click({
+            force: true
+        });
+
+        cy.wait(3000);
+        cy.contains("GUAYAQUIL").closest("tr").click();
+
+        cy.wait(3000);
+
+        cy.contains("Aplicar").click();
+
+        cy.wait(3000);
+        cy.contains("Aceptar").click();
+
+        cy.contains("Guardar y Cerrar").click();
+
+
     }
 
 
