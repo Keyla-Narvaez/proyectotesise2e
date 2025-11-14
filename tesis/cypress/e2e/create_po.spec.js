@@ -28,9 +28,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             poPage.purchaseOrder(); 
         
     });
-cy.wait(3000);
-
-
+    
     it('📦 Recepcionar Orden de Compra', () => {
         // Esperar 2 minutos
         cy.wait(60000);
