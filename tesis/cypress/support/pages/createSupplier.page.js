@@ -11,8 +11,8 @@ class createSuppliersPage {
         cy.get('div[class="atk-col-apps"]').contains("Proveedores").click();
 
         cy.get('div[title="Tareas"]', {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .find("a")
             .should("be.visible")
@@ -21,18 +21,18 @@ class createSuppliersPage {
             });
 
         cy.contains("Crear proveedor", {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .click({
                 force: true
             });
-        
+
         const nombre = poData.purchaseOrder.proveedor;
 
         cy.get(`input[name^="pt1:_FOr1:1:_FONSr2:0:_FOTRaT:0:dynam1:0:it1"]`, {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("be.visible")
             .type(nombre, {
                 delay: 50
@@ -47,8 +47,8 @@ class createSuppliersPage {
             .select("0");
 
         cy.xpath('//input[contains(@id, "countryNameId")]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -63,8 +63,8 @@ class createSuppliersPage {
 
         cy.log("Escribiendo en Registro Fiscal (TaxReg)");
         cy.xpath('//input[contains(@id, "TaxReg::content")]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -74,8 +74,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[contains(@id, "IncomeTaxId")]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -85,8 +85,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//button[contains(text(), "Crear")]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("exist")
             .should("be.visible")
             .click({
@@ -94,16 +94,16 @@ class createSuppliersPage {
             });
 
         cy.contains("Perfil", {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .click({
                 force: true
             });
 
         cy.get('select[name*="selectOneChoice4"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("exist")
             .should("be.visible")
             .should("not.be.disabled")
@@ -119,8 +119,8 @@ class createSuppliersPage {
 
         ["Impuesto de transacción", "Registros fiscales"].forEach((text) => {
             cy.contains(text, {
-                    timeout: 10000
-                })
+                timeout: 10000
+            })
                 .should("be.visible")
                 .click({
                     force: true
@@ -128,18 +128,18 @@ class createSuppliersPage {
         });
 
         cy.get('img[title="Crear"]', {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .click({
                 force: true
             });
 
         cy.xpath(
-                '//input[contains(@id,"taxRegimeCodeId") and contains(@id,"::content")]', {
-                    timeout: 30000
-                }
-            )
+            '//input[contains(@id,"taxRegimeCodeId") and contains(@id,"::content")]', {
+            timeout: 30000
+        }
+        )
             .should("exist")
             .should("be.visible")
             .click({
@@ -152,14 +152,14 @@ class createSuppliersPage {
             });
 
         cy.get(
-                `select[name^="pt1:_FOr1:1:_FONSr2:0:MAt2:0:ap1:pTxRg2:0:TaxRe1:0:mngTaxRgstAplTab:registrationTypeNameId"]`
-            )
+            `select[name^="pt1:_FOr1:1:_FONSr2:0:MAt2:0:ap1:pTxRg2:0:TaxRe1:0:mngTaxRgstAplTab:registrationTypeNameId"]`
+        )
             .should("be.visible")
             .select("10");
 
         cy.get(
-                `input[name^="pt1:_FOr1:1:_FONSr2:0:MAt2:0:ap1:pTxRg2:0:TaxRe1:0:mngTaxRgstAplTab:it1"]`
-            )
+            `input[name^="pt1:_FOr1:1:_FONSr2:0:MAt2:0:ap1:pTxRg2:0:TaxRe1:0:mngTaxRgstAplTab:it1"]`
+        )
             .should("be.visible")
             .type(cedula, {
                 delay: 50
@@ -170,16 +170,16 @@ class createSuppliersPage {
         });
 
         cy.contains("Pagos", {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .click({
                 force: true
             });
 
         cy.contains("EC EFT TRANS-CUE BOLIVARIANO", {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("exist")
             .parents("tr")
             .find('a[title="Por defecto"]')
@@ -189,24 +189,24 @@ class createSuppliersPage {
             });
 
         cy.contains("Direcciones", {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .click({
                 force: true
             });
 
         cy.get('img[title="Crear"]', {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .click({
                 force: true
             });
 
         cy.xpath('//input[contains(@id, "it25") and contains(@id, "content")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -216,8 +216,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[contains(@id, "soc8") and contains(@id, "content")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -227,8 +227,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[contains(@id, "it3") and contains(@id, "content")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -238,8 +238,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[contains(@id, "geographyElement3Id")]', {
-                timeout: 10000
-            })
+            timeout: 10000
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -251,8 +251,8 @@ class createSuppliersPage {
         cy.wait(2000);
 
         cy.xpath('//input[contains(@id, "it10") and contains(@id, "content")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("be.visible")
             .clear({
                 force: true
@@ -262,16 +262,16 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[@type="checkbox" and contains(@id, "smc11")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("exist")
             .check({
                 force: true
             });
 
         cy.xpath('//input[contains(@id, "it16") and contains(@id, "content")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("exist")
             .should("be.visible")
             .then(($el) => {
@@ -288,8 +288,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[contains(@id, "it17") and contains(@id, "content")]', {
-                timeout: 10000,
-            })
+            timeout: 10000,
+        })
             .should("exist")
             .should("be.visible")
             .then(($el) => {
@@ -306,8 +306,8 @@ class createSuppliersPage {
             });
 
         cy.xpath('//select[contains(@id,"Context")]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("exist")
             .should("be.visible")
             .select("Ecuador", {
@@ -317,8 +317,8 @@ class createSuppliersPage {
         cy.wait(1000);
 
         cy.get('[id*="RelatedParty_DisplayEcuador::content"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .click({
                 force: true
@@ -331,8 +331,8 @@ class createSuppliersPage {
             });
 
         cy.get('[id*="WhtForeignPay_DisplayEcuador::content"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .click({
                 force: true
@@ -345,8 +345,8 @@ class createSuppliersPage {
             });
 
         cy.get('[id*="MinorRegime_DisplayEcuador::content"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .click({
                 force: true
@@ -359,8 +359,8 @@ class createSuppliersPage {
             });
 
         cy.get('[id*="PayMode_DisplayEcuador::content"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .click({
                 force: true
@@ -373,8 +373,8 @@ class createSuppliersPage {
             });
 
         cy.get('[id*="RiseContributor_DisplayEcuador::content"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .click({
                 force: true
@@ -387,8 +387,8 @@ class createSuppliersPage {
             });
 
         cy.get('[id*="AT3:_ATp:create::icon"]', {
-                timeout: 30000
-            })
+            timeout: 30000
+        })
             .should("be.visible")
             .click({
                 force: true
@@ -411,51 +411,96 @@ class createSuppliersPage {
             force: true
         });
 
-        cy.wait(1000);
+        cy.wait(2000);
 
         cy.get('a[role="button"] span').contains("Cancelar").click({
             force: true
         });
 
-        cy.wait(3000);
+        cy.wait(3500);
 
-        cy.contains("a", "Contactos").should("be.visible").click({
-            force: true
-        });
+        cy.contains('a', 'Sitios').click();
 
-        cy.wait(3000);
+        cy.contains('PRINCIPAL').click();
 
-        cy.get('[title="Crear"]').first().click();
+        cy.contains('Asignaciones de sitios').click();
 
-        cy.xpath('//label[text()="Nombre"]/ancestor::tr[1]//input')
-            .first()
-            .type("hczrutf");
+        // Busca el contenedor DIV con el título "Agregar"
+        cy.get('div[title="Agregar"]')
+            // y hace clic en el enlace clickable dentro de él
+            .find('a')
+            .click();
 
-        cy.xpath('//label[text()="Apellidos"]/ancestor::tr[1]//input')
-            .first()
-            .type("dscozri");
+         // Usamos el selector parcial [id*="..."] con el comando .type()
+cy.get('input[id*="cbuLov\\:\\:content"]')
+  // Aseguramos la visibilidad, esperando hasta 10 segundos
+  .should('be.visible', { timeout: 10000 }) 
+  // Limpiamos el campo
+  .clear() 
+  // Ingresamos el texto y presionamos {enter} para simular el tabulador o la selección
+  .type('HOSPITAL LUIS VERNAZA{enter}');
 
-        cy.xpath('//label[text()="Correo electrónico"]/ancestor::tr[1]//input')
-            .first()
-            .type("sendmail-test-discard+300000021257644@oracle.com");
+ cy.wait(3000);
+cy.get('input[id*="shipLoc\\:\\:content"]', { timeout: 10000 })
+  .should('be.visible') 
+  .as('shipLocInput');
+cy.get('@shipLocInput')
+  .type('{selectall}GUAYAQUIL{enter}', { force: true });
 
-        cy.contains("Acciones").click();
+cy.get('input[id*="billLoc\\:\\:content"]', { timeout: 10000 })
+  .should('be.visible') 
+  .as('billLocInput');
+cy.get('@billLocInput')
+  .type('{selectall}GUAYAQUIL{enter}', { force: true });
 
-        cy.contains("Seleccionar y agregar").click({
-            force: true
-        });
 
-        cy.wait(3000);
-        cy.contains("GUAYAQUIL").closest("tr").click();
+cy.wait(3000); 
 
-        cy.wait(3000);
+cy.get('div[id*="cb3"] a[accesskey="G"]')
+  // Forzamos el clic para ignorar el 'display: none' del contenedor padre.
+  .click({ force: true });
 
-        cy.contains("Aplicar").click();
+cy.wait(3000); 
 
-        cy.wait(3000);
-        cy.contains("Aceptar").click();
-
-        cy.contains("Guardar y Cerrar").click();
+            cy.contains("a", "Contactos").should("be.visible").click({
+                    force: true
+                });
+        
+                cy.wait(3000);
+        
+                cy.get('[title="Crear"]').first().click();
+        
+                cy.xpath('//label[text()="Nombre"]/ancestor::tr[1]//input')
+                    .first()
+                    .type("hczrutf");
+        
+                cy.xpath('//label[text()="Apellidos"]/ancestor::tr[1]//input')
+                    .first()
+                    .type("dscozri");
+        
+                cy.xpath('//label[text()="Correo electrónico"]/ancestor::tr[1]//input')
+                    .first()
+                    .type("sendmail-test-discard+300000021257644@oracle.com");
+        
+                cy.contains("Acciones").click();
+        
+                cy.contains("Seleccionar y agregar").click({
+                    force: true
+                });
+        
+                cy.wait(3000);
+                cy.contains("GUAYAQUIL").closest("tr").click();
+        
+                cy.wait(3000);
+        
+                cy.contains("Aplicar").click();
+        
+                cy.wait(3000);
+                cy.contains("Aceptar").click();
+        
+                cy.contains("Guardar y Cerrar").click();
+        
+                
     }
 
 
