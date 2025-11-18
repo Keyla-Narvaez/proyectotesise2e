@@ -66,8 +66,10 @@ class receptionPage {
           .click({ force: true })
           .type(`PROPIO_SCS{enter}`, { force: true });
 
-        cy.get(`#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAnt2\\:1\\:appPanelid\\:AT1\\:_ATp\\:table1\\:${index}\\:kf1CS\\:\\:content`)
-          .type('L1.01.01.01');
+        /*cy.get(`#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAnt2\\:1\\:appPanelid\\:AT1\\:_ATp\\:table1\\:${index}\\:kf1CS\\:\\:content`)
+          .type('L1.01.01.01');*/
+        cy.get('input[aria-label="Localizador"]').type('L1.01.01.01');
+
 
         const codigoFormateado = `3-${item.codigoArticulo.slice(-3)}`;
         cy.get(`#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAnt2\\:1\\:appPanelid\\:AT1\\:_ATp\\:table1\\:${index}\\:it3\\:\\:content`, { timeout: 30000 })

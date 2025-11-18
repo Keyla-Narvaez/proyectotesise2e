@@ -5,7 +5,7 @@ import createItemsPage from '../support/pages/createItems.page'
 import createSuppliersPage from '../support/pages/createSupplier.page'
 
 describe('E2E - Crear y Recepcionar Orden de Compra', () => {
-/*
+
     it('📋 Creación de artículos', () => {
 
             // Login & flujo de creación
@@ -28,13 +28,13 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER'), Cypress.env('PASS'));
             poPage.purchaseOrder(); 
-            //cy.wait(2000);
+            cy.wait(2000);
         
     });
-   */ 
+    
     it('📦 Recepcionar Orden de Compra', () => {
         // Esperar 2 minutos
-        cy.wait(60000);
+        //cy.wait(60000);
 
         cy.readFile('cypress/fixtures/datos-guardados.json').then((data) => {
             const codigoOC = data.codigoOC;
