@@ -417,10 +417,12 @@ class createSuppliersPage {
             force: true
         });
 
+        cy.wait(4500);
+
+cy.get("a.xod").contains('Sitios').click({ force: true });
+
+
         cy.wait(3500);
-
-        cy.contains('a', 'Sitios').click();
-
         cy.contains('PRINCIPAL').click();
 
         cy.contains('Asignaciones de sitios').click();

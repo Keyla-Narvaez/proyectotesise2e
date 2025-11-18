@@ -42,15 +42,21 @@ class PurchaseOrderPage {
         cy.get('#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:_FOTRaT\\:0\\:dynam1\\:0\\:commandButton1')
             .click();
 
-        cy.get('#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAt2\\:0\\:AP1\\:inputText33\\:\\:content', {
+        // cy.get('#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAt2\\:0\\:AP1\\:inputText33\\:\\:content', {
+        //         timeout: 30000
+        //     })
+        //     .should('be.visible')
+        //     .clear()
+        //     .type(poData.purchaseOrder.email);
+
+        // cy.get('#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAt2\\:0\\:AP1\\:AT1\\:_ATp\\:create')
+        //     .click();
+
+        cy.get('#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAt2\\:0\\:AP1\\:AT1\\:_ATp\\:create\\:\\:icon', {
                 timeout: 30000
             })
-            .should('be.visible')
-            .clear()
-            .type(poData.purchaseOrder.email);
-
-        cy.get('#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAt2\\:0\\:AP1\\:AT1\\:_ATp\\:create')
-            .click();
+            .should('be.visible')    
+            .click()
 
         return this.fillItems(); // permite encadenamiento si fillItems devuelve algo útil
     }
