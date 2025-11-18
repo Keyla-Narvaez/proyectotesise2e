@@ -28,7 +28,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER'), Cypress.env('PASS'));
             poPage.purchaseOrder(); 
-            cy.wait(2000);
+            //cy.wait(2000);
         
     });
     
