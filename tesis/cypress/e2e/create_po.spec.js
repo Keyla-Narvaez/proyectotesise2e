@@ -34,7 +34,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
     
     it('📦 Recepcionar Orden de Compra', () => {
         // Esperar 2 minutos
-        cy.wait(60000);
+        cy.wait(5000);
 
         cy.readFile('cypress/fixtures/datos-guardados.json').then((data) => {
             const codigoOC = data.codigoOC;
