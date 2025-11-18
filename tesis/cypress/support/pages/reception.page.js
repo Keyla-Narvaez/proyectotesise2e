@@ -84,8 +84,12 @@ class receptionPage {
           .click({ force: true })
           .type(`PROPIO_SCS{enter}`, { force: true });
 
-        cy.get(
+        /*cy.get(
           `#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAnt2\\:1\\:appPanelid\\:AT1\\:_ATp\\:table1\\:${index}\\:kf1CS\\:\\:content`
+        ).type("L1.01.01.01");*/
+        cy.get(
+          // Reemplaza el nombre del campo si es necesario, pero basado en la imagen es 'kf1CS::content'
+          `[id="_FOpt1:FOr1:0:FONSr2:0:MAnt2:1:appPanelid:ATp:table1:0:kf1CS::content"]`
         ).type("L1.01.01.01");
 
         const codigoFormateado = `3-${item.codigoArticulo.slice(-3)}`;
