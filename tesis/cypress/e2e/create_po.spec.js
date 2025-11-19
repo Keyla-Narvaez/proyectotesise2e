@@ -6,7 +6,7 @@ import createSuppliersPage from '../support/pages/createSupplier.page'
 
 describe('E2E - Crear y Recepcionar Orden de Compra', () => {
 
-    ('📋 Creación de artículos', () => {
+    it('📋 Creación de artículos', () => {
 
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
