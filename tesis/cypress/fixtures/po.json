@@ -1,16 +1,16 @@
 {
     "purchaseOrder": {
-        "proveedor": "PROVEEDOR KM69",
-        "cedula": "0997944621029",
+        "proveedor": "PROVEEDOR KM70",
+        "cedula": "0997944621030",
         "unidadNegocio": "HOSPITAL LUIS VERNAZA",
         "ubicacionEnvio": "ORG HLV BOTICA CNTRAL",
         "sitioProveedor": "PRINCIPAL",
         "comprador": "Narvaez Marcillo, Keyla Luisa",
         "email": "cbermeo@jbgye.org.ec",
-        "articuloMela": "0089900929",
+        "articuloMela": "0089900930",
         "articulos": [
             {
-                "codigoArticulo": "0089900929",
+                "codigoArticulo": "0089900930",
                 "cantidad": 10,
                 "price": 1
             }
