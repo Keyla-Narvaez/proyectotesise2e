@@ -5,50 +5,33 @@ const articulos = require("../../fixtures/po.json");
 class receptionPage {
   navigateInventory() {
     // cy.xpath(`//*[@id="_FOpt1:_UIShome"]`).click();
-    cy.xpath(`//*[@id="pt1:_UISfavIconu"]`).click();
+    /*cy.xpath(`//*[@id="pt1:_UISfavIconu"]`).click();
     cy.xpath(`//*[@id="pt1:_UISfpr1:0:itr1_RI:1:cl3_RI"]`).click({
       timeout: 30000,
-    });
+    });*/
+cy.wait(4000);
+cy.get('a[title="Favoritos y Elementos Recientes"]')
+  .invoke('removeAttr', 'href') 
+  .click({ force: true }); 
+
+
+// Paso 1: Obtener el enlace, prevenir su comportamiento de navegación y hacer clic
+cy.get('a[title="Recibir envíos previstos"]')
+  .invoke('removeAttr', 'href') // 🚫 Previene el salto/refresh de la página
+  .click();
+
   }
+  
 
   OcReception(codigoOC) {
     cy.then(() => {
       cy.log("Código recibido desde JSON:", codigoOC);
 
-      cy.xpath(
-        `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00::lovIconId"]`
-      )
-        .should("be.visible", { timeout: 30000 })
-        .click();
+  cy.get('input[id*="value00\\:\\:content"]')
+  .should('be.visible')
+  .type(`${codigoOC}{enter}`, { delay: 50 });
 
-      cy.xpath(
-        `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00::dropdownPopup::popupsearch"]`
-      ).click();
-
-      cy.xpath(
-        `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00::_afrLovInternalQueryId:value00::content"]`
-      ).type(`${codigoOC}{enter}`, { force: true });
-
-      cy.xpath(
-        `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00::_afrLovInternalQueryId::search"]`
-      ).click();
-
-      cy.wait(4000);
-
-      cy.xpath(
-        `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00_afrLovInternalTableId::db"]/table/tbody/tr/td[2]/div/table/tbody/tr/td[1]`
-      )
-        .should("be.visible", { timeout: 40000 })
-        .click({ force: true });
-
-      cy.wait(3000);
-
-      cy.xpath(
-        `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00::lovDialogId::ok"]`
-      ).click();
-
-      cy.wait(3000);
-
+ cy.wait(4000);
       cy.xpath(
         `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry::search"]`
       ).click({ force: true });
@@ -83,11 +66,8 @@ class receptionPage {
         )
           .click({ force: true })
           .type(`PROPIO_SCS{enter}`, { force: true });
-        cy.wait(2000)
-        /*cy.get(
-          `#_FOpt1\\:_FOr1\\:0\\:_FONSr2\\:0\\:MAnt2\\:1\\:appPanelid\\:AT1\\:_ATp\\:table1\\:${index}\\:kf1CS\\:\\:content`
-        ).type("L1.01.01.01");*/
-        // Busca un <input> cuyo ID termine con "kf1CS::content"
+        cy.wait(2000);
+       
         cy.get('input[id$="kf1CS::content"]').type("L1.01.01.01");
 
         const codigoFormateado = `3-${item.codigoArticulo.slice(-3)}`;
@@ -104,9 +84,7 @@ class receptionPage {
 
         cy.wait(2000);
 
-        /*cy.xpath(`//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:1:appPanelid:AT1:_ATp:table1:${index}:LotExpid::content"]`)
-          .click({ force: true })
-          .type(`10/26/30`, { force: true });*/
+        
         cy.get(`input[id$="table1:${index}:LotExpid::content"]`)
           .click({ force: true })
           .type("10/26/30", { force: true });

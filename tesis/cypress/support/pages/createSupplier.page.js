@@ -205,7 +205,7 @@ class createSuppliersPage {
             });
 
         cy.xpath('//input[contains(@id, "it25") and contains(@id, "content")]', {
-            timeout: 10000,
+            timeout: 20000,
         })
             .should("be.visible")
             .clear({

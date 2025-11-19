@@ -34,13 +34,13 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
 
     it('📦 Recepcionar Orden de Compra', () => {
         // Esperar 2 minutos
-        cy.wait(5000);
+        //cy.wait(5000);
 
         cy.readFile('cypress/fixtures/datos-guardados.json').then((data) => {
             const codigoOC = data.codigoOC;
             cy.log(`Código cargado desde JSON: ${codigoOC}`);
 
-            loginPage.login(Cypress.env('USER'), Cypress.env('PASS'));
+            loginPage.login(Cypress.env('USER3'), Cypress.env('PASS3'));
 
             // Llamar la recepción pasándole el código
             receptionPage.receptionPageOrder(codigoOC);
