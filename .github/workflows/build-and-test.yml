@@ -48,8 +48,8 @@ jobs:
           npx cypress install
 
       - name: Run Tests
-        #run: npx cypress run --browser edge
-        run: npx cypress run --headed --browser edge
+        run: npx cypress run --browser edge
+        #run: npx cypress run --headed --browser edge
 
       # ➡️ PASO ACTUALIZADO PARA SUBIR VIDEOS Y CAPTURAS DE PANTALLA
       - name: Upload Cypress Artifacts (Screenshots & Videos)
