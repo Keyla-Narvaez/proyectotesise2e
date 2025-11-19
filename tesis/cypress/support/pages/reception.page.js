@@ -27,9 +27,16 @@ cy.get('a[title="Recibir envíos previstos"]')
     cy.then(() => {
       cy.log("Código recibido desde JSON:", codigoOC);
 
-  cy.get('input[id*="value00\\:\\:content"]')
+  /*cy.get('input[id*="value00\\:\\:content"]')
   .should('be.visible')
-  .type(`${codigoOC}{enter}`, { delay: 50 });
+  .type(`${codigoOC}{enter}`, { delay: 100 });*/
+  cy.get('input[aria-label=" Orden de compra"]')
+  .should('exist')
+  .scrollIntoView()
+  .click({ force: true })
+  .clear()
+  .type(`${codigoOC}{enter}`, { delay: 80 });
+
 
  cy.wait(4000);
       cy.xpath(
