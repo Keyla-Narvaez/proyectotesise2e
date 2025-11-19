@@ -39,9 +39,13 @@ cy.get('a[title="Recibir envíos previstos"]')
 
 
  cy.wait(4000);
-      cy.xpath(
+      /*cy.xpath(
         `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry::search"]`
-      ).click({ force: true });
+      ).click({ force: true });*/
+      cy.xpath('//*[contains(@id, "rcvQry::search")]')
+  .should('be.visible')
+  .click({ force: true });
+
 
       cy.wait(3000);
 

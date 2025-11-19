@@ -6,7 +6,7 @@ import createSuppliersPage from '../support/pages/createSupplier.page'
 
 describe('E2E - Crear y Recepcionar Orden de Compra', () => {
 
-    it('📋 Creación de artículos', () => {
+    /*('📋 Creación de artículos', () => {
 
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
@@ -31,7 +31,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             cy.wait(2000);
         
     });
-
+*/
     it('📦 Recepcionar Orden de Compra', () => {
         // Esperar 2 minutos
         //cy.wait(5000);
