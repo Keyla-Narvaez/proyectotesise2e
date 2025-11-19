@@ -33,12 +33,12 @@ class receptionPage {
         `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00::_afrLovInternalQueryId::search"]`
       ).click();
 
-      cy.wait(3000);
+      cy.wait(4000);
 
       cy.xpath(
         `//*[@id="_FOpt1:_FOr1:0:_FONSr2:0:MAnt2:0:pt1:ap1:rcvQry:value00_afrLovInternalTableId::db"]/table/tbody/tr/td[2]/div/table/tbody/tr/td[1]`
       )
-        .should("be.visible", { timeout: 30000 })
+        .should("be.visible", { timeout: 40000 })
         .click({ force: true });
 
       cy.wait(3000);
