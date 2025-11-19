@@ -51,14 +51,14 @@ jobs:
         #run: npx cypress run --browser edge
         run: npx cypress run --headed --browser edge
 
+      # ➡️ PASO ACTUALIZADO PARA SUBIR VIDEOS Y CAPTURAS DE PANTALLA
       - name: Upload Cypress Artifacts (Screenshots & Videos)
-        if: failure()
+        # ⚠️ CAMBIO 1: Usar always() para subir el video aunque el test pase
+        if: always() 
         uses: actions/upload-artifact@v4
         with:
           name: cypress-artifacts
+          # ⚠️ CAMBIO 2: Corregir la ruta para que sea relativa al working-directory (./tesis)
           path: |
-            tesis/cypress/screenshots
-            tesis/cypress/videos
-
-
-
+            cypress/screenshots
+            cypress/videos
