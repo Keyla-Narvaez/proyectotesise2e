@@ -92,14 +92,12 @@ class createSuppliersPage {
             .click({
                 force: true
             });
+      
+        /*cy.contains("Perfil", { timeout: 20000 })
+  .should("exist")
+  .should("be.enabled")
+  .click();*/
 
-        cy.contains("Perfil", {
-            timeout: 10000
-        })
-            .should("be.visible")
-            .click({
-                force: true
-            });
 
         cy.get('select[name*="selectOneChoice4"]', {
             timeout: 30000
@@ -422,9 +420,10 @@ class createSuppliersPage {
 cy.get("a.xod").contains('Sitios').click({ force: true });
 
 
-        cy.wait(3500);
-        cy.contains('PRINCIPAL').click();
-
+       cy.contains('PRINCIPAL', { timeout: 10000 })
+  .should('be.visible')
+  .click();
+  
         cy.contains('Asignaciones de sitios').click();
 
         // Busca el contenedor DIV con el título "Agregar"
@@ -477,9 +476,10 @@ cy.get("a.xod").contains('Sitios').click({ force: true });
 
         cy.get('[title="Crear"]').first().click();
 
-        cy.xpath('//label[text()="Nombre"]/ancestor::tr[1]//input')
-            .first()
-            .type("hczrutf");
+        cy.xpath('//label[text()="Nombre"]/following::input[1]')
+  .should('be.visible')
+  .type("hczrutf");
+
 
         cy.xpath('//label[text()="Apellidos"]/ancestor::tr[1]//input')
             .first()

@@ -9,7 +9,7 @@ module.exports = defineConfig({
 
     setupNodeEvents(on, config) {
 
-      // ✅ Task para escribir JSON de Orden de Compra
+      // Task para escribir JSON de Orden de Compra
       on('task', {
         writeFile({ filename, data }) {
           const filePath = path.join(__dirname, 'cypress', 'fixtures', filename);
@@ -17,7 +17,7 @@ module.exports = defineConfig({
           return null;
         },
 
-        // ✅ Task para Mochawesome: agregar contexto al reporte
+        // Task para Mochawesome: agregar contexto al reporte
         "mochawesome:addContext"({ test, value }) {
           try {
             const contextDir = path.join(__dirname, ".cypress-context");
@@ -32,7 +32,7 @@ module.exports = defineConfig({
 
             return null;
           } catch (err) {
-            console.error("❌ Error agregando contexto Mochawesome:", err);
+            console.error(" Error agregando contexto Mochawesome:", err);
             return null;
           }
         }
@@ -41,11 +41,11 @@ module.exports = defineConfig({
       return config;
     },
 
-    // ✅ Ubicación de pruebas y soporte
+    // Ubicación de pruebas y soporte
     specPattern: "cypress/e2e/**/*.spec.js",
     supportFile: "cypress/support/e2e.js",
 
-    // ✅ Configuración de video y screenshots
+    // Configuración de video y screenshots
     video: true,
     screenshotOnRunFailure: true,
 
@@ -61,12 +61,12 @@ module.exports = defineConfig({
       USER: "knarvaez@jbgye.org.ec",
       PASS: "JBG2025$$",
       USER2: "mvillavice@jbgye.org.ec",
-      PASS2: "ROMEO1234*",
+      PASS2: "MELANI1997102*",
       USER3: "msanchezmo@jbgye.org.ec",
-      PASS3: "Angelin@198706"
+      PASS3: "Angelin@QA2025."
     },
 
-    // ✅ Config reporter Mochawesome (solo JSON)
+    // Config reporter Mochawesome (solo JSON)
     reporter: "mochawesome",
     reporterOptions: {
       reportDir: "cypress/results",

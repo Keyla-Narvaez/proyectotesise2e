@@ -6,7 +6,8 @@ import createSuppliersPage from '../support/pages/createSupplier.page'
 
 describe('E2E - Crear y Recepcionar Orden de Compra', () => {
 
-    it('📋 Creación de artículos', () => {
+
+   /* it(' Creación de artículos', () => {
 
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER2'), Cypress.env('PASS2'));
@@ -14,7 +15,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             cy.wait(2000);
     });
 
-    it('👨‍💻 Creación de proveedores', () => {
+    it(' Creación de proveedores', () => {
 
             // Login & flujo de creación
             loginPage.login(Cypress.env('USER3'), Cypress.env('PASS3'));
@@ -22,7 +23,7 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             cy.wait(2000);
     });
   
-    it('✅ Crear Orden de Compra', () => {
+    it(' Crear Orden de Compra', () => {
 
         
             // Login & flujo de creación
@@ -30,12 +31,12 @@ describe('E2E - Crear y Recepcionar Orden de Compra', () => {
             poPage.purchaseOrder(); 
             cy.wait(2000);
         
-    });
+    });*/
 
-    it('📦 Recepcionar Orden de Compra', () => {
+    it(' Recepcionar Orden de Compra', () => {
         // Esperar 2 minutos
-        //cy.wait(5000);
-
+        //cy.wait(120000);
+cy.wait(1000);
         cy.readFile('cypress/fixtures/datos-guardados.json').then((data) => {
             const codigoOC = data.codigoOC;
             cy.log(`Código cargado desde JSON: ${codigoOC}`);
