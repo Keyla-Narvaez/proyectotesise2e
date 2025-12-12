@@ -1,0 +1,170 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 0,
+    "passes": 0,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-09T19:11:05.232Z",
+    "end": "2025-12-09T19:11:11.130Z",
+    "duration": 5898,
+    "testsRegistered": 4,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 3,
+    "hasSkipped": true
+  },
+  "results": [
+    {
+      "uuid": "76bf3e77-09b3-40de-8cef-f87157cbd130",
+      "title": "",
+      "fullFile": "cypress\\e2e\\create_po.spec.js",
+      "file": "cypress\\e2e\\create_po.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "c8eeda41-1f53-4f29-a1ac-1381bb32f755",
+          "title": "E2E - Crear y Recepcionar Orden de Compra",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": " Creación de artículos",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Creación de artículos",
+              "timedOut": null,
+              "duration": 5882,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Login & flujo de creación\n_login.default.login(Cypress.env('USER2'), Cypress.env('PASS2'));\n_createItems.default.createItems();\ncy.wait(2000);",
+              "err": {
+                "message": "CypressError: Cypress test was stopped while running this command.",
+                "estack": "CypressError: Cypress test was stopped while running this command.\n    at cypressErr (http://localhost:54180/__cypress/runner/cypress_runner.js:77924:18)\n    at Object.errByPath (http://localhost:54180/__cypress/runner/cypress_runner.js:77992:10)\n    at http://localhost:54180/__cypress/runner/cypress_runner.js:153082:72",
+                "diff": null
+              },
+              "uuid": "a1ba47a2-c3f7-4df1-a243-2c7bde467df8",
+              "parentUUID": "c8eeda41-1f53-4f29-a1ac-1381bb32f755",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " Creación de proveedores",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Creación de proveedores",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login & flujo de creación\n_login.default.login(Cypress.env('USER3'), Cypress.env('PASS3'));\n_createSupplier.default.createSuppliers();\ncy.wait(2000);",
+              "err": {},
+              "uuid": "20c83619-018f-43d9-b02d-de4dcaee82df",
+              "parentUUID": "c8eeda41-1f53-4f29-a1ac-1381bb32f755",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": " Crear Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Crear Orden de Compra",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login & flujo de creación\n_login.default.login(Cypress.env('USER'), Cypress.env('PASS'));\n_purchaseOrder.default.purchaseOrder();\ncy.wait(2000);",
+              "err": {},
+              "uuid": "5f4bfee3-1503-4137-971e-715308ba9902",
+              "parentUUID": "c8eeda41-1f53-4f29-a1ac-1381bb32f755",
+              "isHook": false,
+              "skipped": true
+            },
+            {
+              "title": " Recepcionar Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Recepcionar Orden de Compra",
+              "timedOut": null,
+              "duration": 0,
+              "state": "skipped",
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Esperar 2 minutos\n//cy.wait(120000);\ncy.wait(50000);\ncy.readFile('cypress/fixtures/datos-guardados.json').then(data => {\n  const codigoOC = data.codigoOC;\n  cy.log(`Código cargado desde JSON: ${codigoOC}`);\n  _login.default.login(Cypress.env('USER3'), Cypress.env('PASS3'));\n  // Llamar la recepción pasándole el código\n  _reception.default.receptionPageOrder(codigoOC);\n});",
+              "err": {},
+              "uuid": "74f7a354-bdf9-4f3f-85aa-4b2fb03a05f7",
+              "parentUUID": "c8eeda41-1f53-4f29-a1ac-1381bb32f755",
+              "isHook": false,
+              "skipped": true
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "a1ba47a2-c3f7-4df1-a243-2c7bde467df8"
+          ],
+          "pending": [],
+          "skipped": [
+            "20c83619-018f-43d9-b02d-de4dcaee82df",
+            "5f4bfee3-1503-4137-971e-715308ba9902",
+            "74f7a354-bdf9-4f3f-85aa-4b2fb03a05f7"
+          ],
+          "duration": 5882,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}

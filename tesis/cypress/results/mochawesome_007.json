@@ -1,0 +1,165 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 4,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-12-12T00:57:57.073Z",
+    "end": "2025-12-12T01:03:15.281Z",
+    "duration": 318208,
+    "testsRegistered": 4,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "08320371-eaa5-496f-a240-f9a9d9ff7aa0",
+      "title": "",
+      "fullFile": "cypress\\e2e\\create_po.spec.js",
+      "file": "cypress\\e2e\\create_po.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "35a848b1-a7e6-4dea-8c97-48c9ba58ea6d",
+          "title": "E2E - Crear y Recepcionar Orden de Compra",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": " Creación de artículos",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Creación de artículos",
+              "timedOut": null,
+              "duration": 57528,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login & flujo de creación\n_login.default.login(Cypress.env('USER2'), Cypress.env('PASS2'));\n_createItems.default.createItems();\ncy.wait(2000);",
+              "err": {},
+              "uuid": "ae6b2728-61f7-4484-9b5c-9db1ccbc494d",
+              "parentUUID": "35a848b1-a7e6-4dea-8c97-48c9ba58ea6d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " Creación de proveedores",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Creación de proveedores",
+              "timedOut": null,
+              "duration": 95847,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login & flujo de creación\n_login.default.login(Cypress.env('USER3'), Cypress.env('PASS3'));\n_createSupplier.default.createSuppliers();\ncy.wait(2000);",
+              "err": {},
+              "uuid": "b1b75520-4451-49ba-9096-fdbd125a0f79",
+              "parentUUID": "35a848b1-a7e6-4dea-8c97-48c9ba58ea6d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " Crear Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Crear Orden de Compra",
+              "timedOut": null,
+              "duration": 57365,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Login & flujo de creación\n_login.default.login(Cypress.env('USER'), Cypress.env('PASS'));\n_purchaseOrder.default.purchaseOrder();\ncy.wait(2000);",
+              "err": {},
+              "uuid": "599d79a6-efe0-419e-9c78-b79f7c1c3a34",
+              "parentUUID": "35a848b1-a7e6-4dea-8c97-48c9ba58ea6d",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": " Recepcionar Orden de Compra",
+              "fullTitle": "E2E - Crear y Recepcionar Orden de Compra  Recepcionar Orden de Compra",
+              "timedOut": null,
+              "duration": 101512,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Esperar 2 minutos\n//cy.wait(120000);\ncy.wait(50000);\ncy.readFile('cypress/fixtures/datos-guardados.json').then(data => {\n  const codigoOC = data.codigoOC;\n  cy.log(`Código cargado desde JSON: ${codigoOC}`);\n  _login.default.login(Cypress.env('USER3'), Cypress.env('PASS3'));\n  // Llamar la recepción pasándole el código\n  _reception.default.receptionPageOrder(codigoOC);\n});",
+              "err": {},
+              "uuid": "2ca14788-3500-4dcc-985a-44b9e68200f0",
+              "parentUUID": "35a848b1-a7e6-4dea-8c97-48c9ba58ea6d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "ae6b2728-61f7-4484-9b5c-9db1ccbc494d",
+            "b1b75520-4451-49ba-9096-fdbd125a0f79",
+            "599d79a6-efe0-419e-9c78-b79f7c1c3a34",
+            "2ca14788-3500-4dcc-985a-44b9e68200f0"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 312252,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.4"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": true,
+        "json": true,
+        "charts": true,
+        "embeddedScreenshots": true,
+        "inlineAssets": true
+      },
+      "version": "6.3.0"
+    }
+  }
+}
